@@ -139,6 +139,15 @@ impl Connection {
         unsafe { ffi::sqlite3_total_changes(self.raw.0) as usize }
     }
 
+    /// Returns the rowid of the last INSERT statement. See the SQlite
+    /// documentation for full details.
+    /// 
+    /// https://www.sqlite.org/c3ref/last_insert_rowid.html
+    #[inline]
+    pub fn last_insert_rowid(&self) -> i64 {
+        unsafe { ffi::sqlite3_last_insert_rowid(self.raw.0) as i64 }
+    }
+
     /// Set a callback for handling busy events.
     ///
     /// The callback is triggered when the database cannot perform an operation
